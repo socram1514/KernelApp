@@ -50,4 +50,29 @@ public abstract class BasePreferences {
         return preferences.getBoolean(key,false);
     }
 
+    public void writeLongValueKey(String key,long valor){
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putLong(key,valor);
+        editor.commit();
+    }
+
+    public long getLongValue(String key){
+        return preferences.getLong(key,0L);
+    }
+
+    public void writeFloatValueKey(String key,float valor){
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putFloat(key,valor);
+        editor.commit();
+    }
+
+    public float getFloatValue(String key){
+        return preferences.getFloat(key,0);
+    }
+
+    public void cleanFile(){
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.clear();
+        editor.commit();
+    }
 }
