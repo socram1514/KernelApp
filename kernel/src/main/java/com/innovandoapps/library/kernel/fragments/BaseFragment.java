@@ -15,7 +15,7 @@ import android.widget.Toast;;
 /**
  * Base de los fragment del proyecto
  */
-public class BaseFragment extends Fragment {
+public abstract class BaseFragment extends Fragment {
     ///Variables
     protected ProgressDialog barProgressDialog;
     protected Handler handler = new Handler();

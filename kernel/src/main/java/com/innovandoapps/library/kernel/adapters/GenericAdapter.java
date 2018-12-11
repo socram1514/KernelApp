@@ -1,7 +1,6 @@
 package com.innovandoapps.library.kernel.adapters;
 
 import android.widget.BaseAdapter;
-
 import java.util.List;
 
 public abstract class GenericAdapter<T> extends BaseAdapter{
