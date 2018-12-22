@@ -3,8 +3,10 @@ package com.innovandoapps.library.kernel.utils;
 import android.annotation.SuppressLint;
 import android.app.ActivityManager;
 import android.app.AppOpsManager;
+import android.bluetooth.BluetoothAdapter;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.location.LocationManager;
@@ -13,9 +15,12 @@ import android.net.NetworkInfo;
 import android.os.BatteryManager;
 import android.os.Build;
 import android.provider.Settings;
+import android.support.v4.app.FragmentManager;
 import android.telephony.TelephonyManager;
 import com.innovandoapps.library.kernel.BuildConfig;
-
+import com.innovandoapps.library.kernel.R;
+import com.innovandoapps.library.kernel.dialogs.DialogAlertSimple;
+import com.innovandoapps.library.kernel.dialogs.listener.OnPositiveClickListener;
 import java.util.List;
 
 /**
@@ -188,5 +193,28 @@ public class CellInfoUtils {
             }
         }
         return isActivityFound;
+    }
+
+    public static boolean checkHaveBluetooth(Context context,FragmentManager fragmentManager){
+        BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+        if(bluetoothAdapter == null){
+            DialogAlertSimple dialogAlertSimple = new DialogAlertSimple(context.getString(R.string.alert_title_blue),
+                                                                        context.getString(R.string.alert_msj_blue));
+            dialogAlertSimple.setOnPositiveClickListener(new OnPositiveClickListener() {
+                @Override
+                public void OnPositiveClick(DialogInterface dialog, String tag) {
+                    dialog.dismiss();
+                }
+            });
+            dialogAlertSimple.show(fragmentManager,"");
+            return false;
+        }
+        return true;
+    }
+
+    @SuppressLint("MissingPermission")
+    public static boolean checkEnableBluetooth(){
+        BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+        return bluetoothAdapter.isEnabled();
     }
 }

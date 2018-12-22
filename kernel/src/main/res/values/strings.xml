@@ -6,5 +6,6 @@
     <string name="lbl_compartir">COMPARTIR POR</string>
     <string name="dialog_title_permisos">PERMISOS</string>
     <string name="dialog_msj_permisos">La aplicacion no puede operar sin los permisos correspondientes. favor verifique</string>
-
+    <string name="alert_msj_blue">Su dispositivo no soporta bluetooth</string>
+    <string name="alert_title_blue">Alerta bluetooth</string>
 </resources>
