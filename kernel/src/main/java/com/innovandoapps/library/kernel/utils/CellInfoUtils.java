@@ -194,27 +194,4 @@ public class CellInfoUtils {
         }
         return isActivityFound;
     }
-
-    public static boolean checkHaveBluetooth(Context context,FragmentManager fragmentManager){
-        BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-        if(bluetoothAdapter == null){
-            DialogAlertSimple dialogAlertSimple = new DialogAlertSimple(context.getString(R.string.alert_title_blue),
-                                                                        context.getString(R.string.alert_msj_blue));
-            dialogAlertSimple.setOnPositiveClickListener(new OnPositiveClickListener() {
-                @Override
-                public void OnPositiveClick(DialogInterface dialog, String tag) {
-                    dialog.dismiss();
-                }
-            });
-            dialogAlertSimple.show(fragmentManager,"");
-            return false;
-        }
-        return true;
-    }
-
-    @SuppressLint("MissingPermission")
-    public static boolean checkEnableBluetooth(){
-        BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-        return bluetoothAdapter.isEnabled();
-    }
 }
