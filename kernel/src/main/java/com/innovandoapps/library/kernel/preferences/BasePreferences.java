@@ -2,6 +2,7 @@ package com.innovandoapps.library.kernel.preferences;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import com.google.gson.Gson;
 
 /**
  * Created by desarrollo on 23/11/17.
@@ -74,5 +75,17 @@ public abstract class BasePreferences {
         SharedPreferences.Editor editor = preferences.edit();
         editor.clear();
         editor.commit();
+    }
+
+    public void objetoToJson(Object object,String key){
+        Gson gson = new Gson();
+        String json = gson.toJson(object);
+        writeKey(key, json);
+    }
+
+    public Object getObjeto(String key,Class cl ){
+        Gson gson = new Gson();
+        Object t = gson.fromJson(getValueKey(key),cl);
+        return t;
     }
 }

@@ -1,5 +1,6 @@
 package com.innovandoapps.library.kernel.acivitys;
 
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -10,6 +11,8 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
 import com.innovandoapps.library.kernel.R;
+import com.innovandoapps.library.kernel.dialogs.DialogAcpView;
+import com.innovandoapps.library.kernel.dialogs.listener.OnClickDialogListener;
 
 public abstract class BaseNavigationActivity extends BaseActivity {
 
@@ -41,5 +44,29 @@ public abstract class BaseNavigationActivity extends BaseActivity {
     protected abstract String getTitleToolbar();
 
     protected abstract int getIcMenuId();
+
+    protected void closeSession(){
+        DialogAcpView dialogAcpView = new DialogAcpView(getString(R.string.dialog_title_cerrar_session),
+                                                        getString(R.string.dialog_msg_cerrar_session));
+        dialogAcpView.setOnClickDialogListener(new OnClickDialogListener() {
+            @Override
+            public void OnNegativeClick(DialogInterface dialog, String tag) {
+                dialog.cancel();
+            }
+
+            @Override
+            public void OnPositiveClick(DialogInterface dialog, String tag) {
+                dialog.cancel();
+                deleteDataSession();
+            }
+        });
+        dialogAcpView.show(getSupportFragmentManager(),"");
+    }
+
+    protected abstract void deleteDataSession();
+
+    protected void setTitleActionBar(String title){
+        getSupportActionBar().setTitle(title);
+    }
 
 }

@@ -15,14 +15,18 @@ import com.innovandoapps.library.kernel.dialogs.DialogAlertSimple;
 import com.innovandoapps.library.kernel.dialogs.listener.OnPositiveClickListener;
 
 /**
- * Created by windows 8.1 on 20/11/2017.
+ * @Autor Marcos Ramirez
+ * Clase abstracta para los Activitys Main
+ * Agrega la validacion de permisos y servicios
  */
-
 public abstract  class BaseMainActivity extends BaseActivity{
 
     protected Handler handler = new Handler();
     private final int TIME_SLEEP_RETURN = 100;
 
+    /**
+     * Valida los permisos si el dispositivo tiene una version de android igual o mayor al api 23
+     */
 
     @Override
     protected void onResume() {
@@ -34,10 +38,22 @@ public abstract  class BaseMainActivity extends BaseActivity{
         }
     }
 
+    /**
+     * Metodo abstracto para definir el siguiente activity
+     */
     public abstract void saltarActivity();
 
+    /**
+     * Metodo abstracto donde se definen los permisos a validar
+     * @return Array de String de los permisos a verificar
+     */
     public abstract String[] getArrPermisos();
 
+    /**
+     * Metodo donde se recorre los permisos definidos en getArrPermisos a fin de validarlos con el
+     * usuario. si el permiso no esta activo se deplegara un mensaje solicitado la aceptacion del
+     * usuario
+     */
     protected void validarPermisos() {
         String[] arr_permissions = getArrPermisos();
         int sw = 0;
@@ -58,6 +74,9 @@ public abstract  class BaseMainActivity extends BaseActivity{
         }
     }
 
+    /**
+     * Metodo donde se validan los servicios (Localizacion)
+     */
     public void validarServicios(){
         saltarActivity();
     }
@@ -82,6 +101,10 @@ public abstract  class BaseMainActivity extends BaseActivity{
         }
     }
 
+    /**
+     * Metodo que despliega un cuadro de dialogo de alerta si no se activa un permiso
+     * al presionar el aceptar se salta a la pantalla de los detalles de la aplicacion
+     */
     private void alertaPermisos(){
         DialogAlertSimple dialogAlertSimple = new DialogAlertSimple(getString(R.string.dialog_title_permisos),getString(R.string.dialog_msj_permisos));
         dialogAlertSimple.setOnPositiveClickListener(new OnPositiveClickListener() {
