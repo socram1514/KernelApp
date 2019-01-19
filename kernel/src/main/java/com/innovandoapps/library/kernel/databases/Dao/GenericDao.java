@@ -6,7 +6,7 @@ public interface GenericDao<T> {
 
     Long insert(T obj);
 
-    Integer update(T obj);
+    Integer update(T obj,long id);
 
     T find(Long id);
 
